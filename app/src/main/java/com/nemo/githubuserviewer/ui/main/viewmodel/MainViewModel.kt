@@ -1,4 +1,4 @@
-package com.nemo.githubuserviewer.ui.main
+package com.nemo.githubuserviewer.ui.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 
