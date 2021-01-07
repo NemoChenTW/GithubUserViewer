@@ -45,6 +45,9 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.listUsers()
+
     }
 
 }
