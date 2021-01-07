@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nemo.githubuserviewer.databinding.MainFragmentBinding
 import com.nemo.githubuserviewer.di.GithubUserViewerComponentProvider
 import com.nemo.githubuserviewer.ui.main.viewmodel.MainViewModel
@@ -24,12 +26,16 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
+    private val listedUserElementAdapter = ListedUserElementAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
+        binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.adapter = listedUserElementAdapter
+
         return binding.root
     }
 
@@ -46,8 +52,9 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.listUsers()
-
+        viewModel.usersList.observe(viewLifecycleOwner, Observer {
+            listedUserElementAdapter.submitList(it)
+        })
     }
 
 }

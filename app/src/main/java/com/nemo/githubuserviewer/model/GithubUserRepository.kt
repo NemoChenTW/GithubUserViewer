@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class GithubUserRepository @Inject constructor(private val githubService: GithubService) :
     UserRepository {
-    override suspend fun listUsers(): List<ListedUser> {
+    override suspend fun listUsers(since: Int, userPerPage: Int): List<ListedUser> {
         return try {
-            val response = githubService.listUsers()
+            val response = githubService.listUsers(since = since, perPage = userPerPage)
             if (response.isSuccessful) {
                 response.body()!!
             } else {

@@ -1,24 +1,22 @@
 package com.nemo.githubuserviewer.ui.main.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.nemo.githubuserviewer.model.UserRepository
-import com.nemo.githubuserviewer.model.data.ListedUser
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.nemo.githubuserviewer.model.datasource.ListedUserDataSourceFactory
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
-    var usersList = MutableLiveData<MutableList<ListedUser>>()
+    private val listedUserDataSourceFactory = ListedUserDataSourceFactory(viewModelScope, userRepository)
+    val usersList = LivePagedListBuilder(listedUserDataSourceFactory, pagedListConfig()).build()
 
-    fun listUsers() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = userRepository.listUsers()
-            if (result.isNotEmpty()) {
-                usersList.postValue(result as MutableList<ListedUser>)
-            }
-        }
-    }
+    private fun pagedListConfig() = PagedList.Config.Builder()
+            .setPageSize(10)
+            .setInitialLoadSizeHint(10)
+            .setPrefetchDistance(5)
+            .setEnablePlaceholders(false)
+            .build()
 }
