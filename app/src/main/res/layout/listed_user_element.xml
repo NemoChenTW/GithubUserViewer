@@ -9,6 +9,10 @@
         <variable
             name="item"
             type="com.nemo.githubuserviewer.model.data.ListedUser" />
+
+        <variable
+            name="itemClick"
+            type="com.nemo.githubuserviewer.ui.main.ItemClick" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -18,7 +22,8 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
+        app:contentPadding="8dp"
+        android:onClick="@{(view)->itemClick.onItemClicked(view, item)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

@@ -11,11 +11,12 @@ import com.bumptech.glide.Glide
 import com.nemo.githubuserviewer.databinding.ListedUserElementBinding
 import com.nemo.githubuserviewer.model.data.ListedUser
 
-class ListedUserElementAdapter : PagedListAdapter<ListedUser, RecyclerView.ViewHolder>(DiffCallback) {
+class ListedUserElementAdapter(val itemClick: ItemClick<ListedUser>) : PagedListAdapter<ListedUser, RecyclerView.ViewHolder>(DiffCallback) {
 
     class ViewHolder(var binding: ListedUserElementBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ListedUser) {
+        fun bind(item: ListedUser, itemClick: ItemClick<ListedUser>) {
             binding.item = item
+            binding.itemClick = itemClick
             binding.executePendingBindings()
         }
     }
@@ -31,7 +32,7 @@ class ListedUserElementAdapter : PagedListAdapter<ListedUser, RecyclerView.ViewH
         when (holder) {
             is ViewHolder -> {
                 getItem(position)?.let {
-                    holder.bind(it)
+                    holder.bind(it, itemClick)
                 }
             }
         }

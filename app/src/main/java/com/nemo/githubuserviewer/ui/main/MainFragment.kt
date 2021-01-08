@@ -10,8 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nemo.githubuserviewer.R
 import com.nemo.githubuserviewer.databinding.MainFragmentBinding
 import com.nemo.githubuserviewer.di.GithubUserViewerComponentProvider
+import com.nemo.githubuserviewer.model.data.DetailedUser
+import com.nemo.githubuserviewer.model.data.ListedUser
 import com.nemo.githubuserviewer.ui.main.viewmodel.MainViewModel
 import javax.inject.Inject
 
@@ -26,7 +29,12 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
-    private val listedUserElementAdapter = ListedUserElementAdapter()
+    private val listedUserElementAdapter = ListedUserElementAdapter(object : ItemClick<ListedUser> {
+        override fun onItemClicked(view: View, item: ListedUser) {
+            viewModel.userDetail(item.login)
+        }
+
+    })
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +63,26 @@ class MainFragment : Fragment() {
         viewModel.usersList.observe(viewLifecycleOwner, Observer {
             listedUserElementAdapter.submitList(it)
         })
+
+        viewModel.detailedUser.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                showDetailedUser(DetailedUserFragment(it))
+            }
+        })
+    }
+
+    private fun showDetailedUser(fragment: DetailedUserFragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                        android.R.anim.fade_in,
+                        android.R.anim.fade_out,
+                        android.R.anim.fade_in,
+                        android.R.anim.fade_out
+                )
+                .add(R.id.container, fragment)
+                .show(fragment)
+                .addToBackStack(DetailedUserFragment.TAG)
+                .commit()
     }
 
 }
