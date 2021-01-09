@@ -13,6 +13,14 @@ object Dependencies {
         const val recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
         const val pagingRuntime = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
 
+        object Room {
+            const val room = "androidx.room:room-runtime:${Versions.room}"
+
+            object Kapt {
+                const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+            }
+        }
+
 
         object Lifecycle {
             const val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
@@ -24,12 +32,12 @@ object Dependencies {
     object Dagger2 {
         const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
         const val daggerAndroidSupport =
-            "com.google.dagger:dagger-android-support:${Versions.dagger}"
+                "com.google.dagger:dagger-android-support:${Versions.dagger}"
 
         object Kapt {
             const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
             const val daggerAndroidProcessor =
-                "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+                    "com.google.dagger:dagger-android-processor:${Versions.dagger}"
         }
     }
 
@@ -40,6 +48,7 @@ object Dependencies {
             const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
         }
     }
+
     object Google {
         const val material = "com.google.android.material:material:1.2.1"
     }
@@ -52,6 +61,7 @@ object Dependencies {
         object Okhttp3 {
             const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:3.12.0"
         }
+
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     }
@@ -61,6 +71,7 @@ object Dependencies {
         const val extJunit = "androidx.test.ext:junit:1.1.2"
         const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
         const val pagingCommon = "androidx.paging:paging-common-ktx:${Versions.paging}"
+        const val room = "androidx.room:room-testing:${Versions.room}"
     }
 
 

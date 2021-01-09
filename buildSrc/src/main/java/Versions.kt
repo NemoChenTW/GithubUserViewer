@@ -7,4 +7,5 @@ object Versions {
     const val retrofit = "2.6.4"
     const val paging = "2.1.2"
     const val glide = "4.11.0"
+    const val room = "2.2.6"
 }

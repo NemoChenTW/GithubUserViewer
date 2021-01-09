@@ -52,6 +52,9 @@ dependencies {
     implementation(Dependencies.AndroidX.Lifecycle.viewmodelKtx)
     implementation(Dependencies.Google.material)
 
+    implementation(Dependencies.AndroidX.Room.room)
+    kapt(Dependencies.AndroidX.Room.Kapt.roomCompiler)
+
     implementation(Dependencies.Glide.glide)
     kapt(Dependencies.Glide.Kapt.glideCompiler)
 
