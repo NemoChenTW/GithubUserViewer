@@ -4,9 +4,10 @@ import android.util.Log
 import com.nemo.githubuserviewer.githubapi.GithubService
 import com.nemo.githubuserviewer.model.data.DetailedUser
 import com.nemo.githubuserviewer.model.data.ListedUser
+import com.nemo.githubuserviewer.model.database.UserDao
 import javax.inject.Inject
 
-class GithubUserRepository @Inject constructor(private val githubService: GithubService) :
+class GithubUserRepository @Inject constructor(private val githubService: GithubService, private val userDao: UserDao) :
     UserRepository {
     override suspend fun listUsers(since: Int, userPerPage: Int): List<ListedUser> {
         return try {

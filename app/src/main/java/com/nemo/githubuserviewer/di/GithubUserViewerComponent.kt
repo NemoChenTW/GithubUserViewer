@@ -8,6 +8,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        DatabaseModule::class,
         RetrofitModule::class,
         SubComponentModule::class,
         UserRepositoryModule::class,

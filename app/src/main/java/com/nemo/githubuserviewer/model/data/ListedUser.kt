@@ -1,5 +1,8 @@
 package com.nemo.githubuserviewer.model.data
 
+import androidx.room.Entity
+
+@Entity
 data class ListedUser(
     val avatar_url: String,
     val events_url: String,

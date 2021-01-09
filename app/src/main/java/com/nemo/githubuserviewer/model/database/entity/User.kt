@@ -1,9 +1,12 @@
-package com.nemo.githubuserviewer.model.data
+package com.nemo.githubuserviewer.model.database.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity
-data class DetailedUser(
+@Entity(tableName = "users")
+data class User(
+    val hasDetailed: Boolean,
+    val isFavorite: Boolean,
     val avatar_url: String,
     val bio: String,
     val blog: String,
@@ -19,6 +22,7 @@ data class DetailedUser(
     val gravatar_id: String,
     val hireable: Boolean,
     val html_url: String,
+    @PrimaryKey
     val id: Int,
     val location: String,
     val login: String,
