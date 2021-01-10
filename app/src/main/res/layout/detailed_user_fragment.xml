@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.nemo.githubuserviewer.ui.main.viewmodel.DetailedUserViewModel" />
@@ -172,6 +174,28 @@
             app:layout_constraintBottom_toBottomOf="@id/icon_favorite"
             app:layout_constraintStart_toStartOf="@id/text_link"
             app:layout_constraintTop_toTopOf="@id/icon_favorite" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/button_bi_following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.biFollowing()}"
+            android:src="@drawable/ic_baseline_watching_36"
+            app:layout_constraintBottom_toBottomOf="@id/icon_favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/icon_favorite" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isProcessing()? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

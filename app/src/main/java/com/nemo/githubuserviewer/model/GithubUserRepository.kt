@@ -11,6 +11,7 @@ import com.nemo.githubuserviewer.model.database.UserDao
 import com.nemo.githubuserviewer.model.database.entity.UserFavorite
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import retrofit2.Response
 import javax.inject.Inject
 
 class GithubUserRepository @Inject constructor(
@@ -56,6 +57,52 @@ class GithubUserRepository @Inject constructor(
             null
         }
     }
+
+    override suspend fun getBiFollowing(userName: String): List<ListedUser> {
+        // Assume the follower is less than 100 for now
+        val followers = try {
+            val response = githubService.getUserFollowers(
+                userName = userName,
+                perPage = 100,
+                page = 1
+            )
+            if (response.isSuccessful) {
+                response.body()!!
+            } else {
+                emptyList()
+            }
+        } catch (ex: Exception) {
+            Log.w(TAG, ex.message.orEmpty())
+            emptyList<ListedUser>()
+        }
+
+        if (followers.isEmpty()) {
+            return followers
+        }
+
+        val following = try {
+            val response = githubService.getUserFollowing(
+                userName = userName,
+                perPage = 100,
+                page = 1
+            )
+            if (response.isSuccessful) {
+                response.body()!!
+            } else {
+                emptyList()
+            }
+        } catch (ex: Exception) {
+            Log.w(TAG, ex.message.orEmpty())
+            emptyList<ListedUser>()
+        }
+
+        if (following.isEmpty()) {
+            return following
+        }
+
+        return followers.intersect(following).toList()
+    }
+
 
     override fun favoriteUser(id: Int, isFavorite: Boolean) {
         userDao.update(UserFavorite(id, isFavorite))

@@ -24,5 +24,22 @@ interface GithubService {
     suspend fun getUser(
         @Header("accept") accept: String = ACCEPT_HEADER,
         @Path("username") userName: String
-    ) :Response<DetailedUser>
+    ): Response<DetailedUser>
+
+
+    @GET("/users/{username}/followers")
+    suspend fun getUserFollowers(
+        @Header("accept") accept: String = ACCEPT_HEADER,
+        @Path("username") userName: String,
+        @Query("per_page") perPage: Int? = null,
+        @Query("page") page: Int? = null
+    ): Response<List<ListedUser>>
+
+    @GET("/users/{username}/following")
+    suspend fun getUserFollowing(
+        @Header("accept") accept: String = ACCEPT_HEADER,
+        @Path("username") userName: String,
+        @Query("per_page") perPage: Int? = null,
+        @Query("page") page: Int? = null
+    ): Response<List<ListedUser>>
 }
