@@ -4,6 +4,7 @@ import androidx.room.Entity
 
 @Entity
 data class ListedUser(
+    val isFavorite: Boolean?,
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,

@@ -22,6 +22,11 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
 
             isProcessing.postValue(false)
         }
+    }
 
+    fun favoriteUser(id: Int, isFavorite: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.favoriteUser(id, isFavorite)
+        }
     }
 }

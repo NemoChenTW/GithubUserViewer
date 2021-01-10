@@ -5,4 +5,7 @@ import com.nemo.githubuserviewer.model.data.DetailedUser
 
 class DetailedUserViewModel(val detailedUser: DetailedUser) : ViewModel() {
 
+    fun favoriteUser(id: Int, isFavorite: Boolean) {
+    }
+
 }

@@ -17,6 +17,7 @@ class ListedUserElementAdapter(val itemClick: ItemClick<ListedUser>) : PagingDat
         fun bind(item: ListedUser, itemClick: ItemClick<ListedUser>) {
             binding.item = item
             binding.itemClick = itemClick
+            binding.favoriteSwitch
             binding.executePendingBindings()
         }
     }

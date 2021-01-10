@@ -5,6 +5,7 @@ import androidx.room.Entity
 @Entity
 data class DetailedUser(
     var hasDetailed: Boolean?,
+    val isFavorite: Boolean?,
     val avatar_url: String,
     val bio: String,
     val blog: String,

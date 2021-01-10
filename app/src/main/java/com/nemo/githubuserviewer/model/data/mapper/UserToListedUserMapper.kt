@@ -6,6 +6,7 @@ import com.nemo.githubuserviewer.model.database.entity.User
 class UserToListedUserMapper : Mapper<User, ListedUser> {
     override fun map(input: User): ListedUser {
         return ListedUser(
+            isFavorite = input.isFavorite,
             avatar_url = input.avatar_url,
             events_url = input.events_url,
             followers_url = input.followers_url,

@@ -18,12 +18,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{(view)->itemClick.onItemClicked(view, item)}"
         app:cardBackgroundColor="#ffdddddd"
         app:cardCornerRadius="20dp"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="8dp"
-        android:onClick="@{(view)->itemClick.onItemClicked(view, item)}">
+        app:contentPadding="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -56,8 +56,28 @@
                 android:src="@drawable/ic_baseline_emoji_events_24"
                 android:visibility="@{item.site_admin ? View.INVISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/userName"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/icon_favorite"
                 app:layout_constraintTop_toTopOf="@id/userName" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_favorite_24"
+                app:layout_constraintBottom_toBottomOf="@id/favorite_switch"
+                app:layout_constraintEnd_toStartOf="@id/favorite_switch"
+                app:layout_constraintTop_toTopOf="@id/favorite_switch" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/favorite_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{item.isFavorite() == true}"
+                android:onClick="@{(view)->itemClick.onItemClicked(view, item)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

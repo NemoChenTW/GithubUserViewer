@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.nemo.githubuserviewer.R
 import com.nemo.githubuserviewer.databinding.MainFragmentBinding
 import com.nemo.githubuserviewer.di.GithubUserViewerComponentProvider
@@ -30,8 +33,13 @@ class MainFragment : Fragment() {
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
     private val listedUserElementAdapter = ListedUserElementAdapter(object : ItemClick<ListedUser> {
         override fun onItemClicked(view: View, item: ListedUser) {
-            if (viewModel.isProcessing.value != true) {
-                viewModel.userDetail(item.login)
+            when (view) {
+                is SwitchMaterial -> viewModel.favoriteUser(item.id, view.isChecked)
+                is CardView -> {
+                    if (viewModel.isProcessing.value != true) {
+                        viewModel.userDetail(item.login)
+                    }
+                }
             }
         }
 

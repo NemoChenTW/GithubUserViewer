@@ -7,6 +7,7 @@ class UserToDetailedUserMapper : Mapper<User, DetailedUser> {
     override fun map(input: User): DetailedUser {
         return DetailedUser(
             hasDetailed = input.hasDetailed,
+            isFavorite = input.isFavorite,
             avatar_url = input.avatar_url,
             bio = input.bio.orEmpty(),
             blog = input.blog.orEmpty(),

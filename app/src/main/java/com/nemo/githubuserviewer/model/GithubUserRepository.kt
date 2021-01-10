@@ -8,6 +8,7 @@ import com.nemo.githubuserviewer.model.data.ListedUser
 import com.nemo.githubuserviewer.model.data.mapper.UserToDetailedUserMapper
 import com.nemo.githubuserviewer.model.data.mapper.UserToListedUserMapper
 import com.nemo.githubuserviewer.model.database.UserDao
+import com.nemo.githubuserviewer.model.database.entity.UserFavorite
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -54,6 +55,10 @@ class GithubUserRepository @Inject constructor(
             Log.w(TAG, ex.message.orEmpty())
             null
         }
+    }
+
+    override fun favoriteUser(id: Int, isFavorite: Boolean) {
+        userDao.update(UserFavorite(id, isFavorite))
     }
 
     companion object {
