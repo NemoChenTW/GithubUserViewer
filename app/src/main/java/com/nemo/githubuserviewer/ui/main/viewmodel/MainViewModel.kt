@@ -14,13 +14,6 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
     val usersList = userRepository.fetchUserList().cachedIn(viewModelScope).asLiveData()
     val detailedUser = MutableLiveData<DetailedUser?>()
 
-    private fun pagedListConfig() = PagedList.Config.Builder()
-            .setPageSize(10)
-            .setInitialLoadSizeHint(10)
-            .setPrefetchDistance(5)
-            .setEnablePlaceholders(false)
-            .build()
-
     fun userDetail(userName: String) {
         viewModelScope.launch(Dispatchers.IO) {
             detailedUser.postValue(userRepository.getUser(userName))

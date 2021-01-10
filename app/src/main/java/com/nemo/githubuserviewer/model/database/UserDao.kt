@@ -6,7 +6,6 @@ import com.nemo.githubuserviewer.model.data.DetailedUser
 import com.nemo.githubuserviewer.model.data.ListedUser
 import com.nemo.githubuserviewer.model.database.entity.User
 import com.nemo.githubuserviewer.model.database.entity.UserFavorite
-import com.nemo.githubuserviewer.model.database.entity.UserHasDetailed
 
 @Dao
 interface UserDao {
@@ -27,9 +26,6 @@ interface UserDao {
 
     @Update(entity = User::class)
     fun update(userFavorite: UserFavorite)
-
-    @Update(entity = User::class)
-    fun update(userHasDetailed: UserHasDetailed)
 
     @Delete
     fun delete(user: User)

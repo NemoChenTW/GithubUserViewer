@@ -5,6 +5,7 @@ import androidx.paging.*
 import com.nemo.githubuserviewer.githubapi.GithubService
 import com.nemo.githubuserviewer.model.data.DetailedUser
 import com.nemo.githubuserviewer.model.data.ListedUser
+import com.nemo.githubuserviewer.model.data.mapper.UserToDetailedUserMapper
 import com.nemo.githubuserviewer.model.data.mapper.UserToListedUserMapper
 import com.nemo.githubuserviewer.model.database.UserDao
 import kotlinx.coroutines.flow.Flow
@@ -32,13 +33,22 @@ class GithubUserRepository @Inject constructor(
     }
 
     override suspend fun getUser(userName: String): DetailedUser? {
+        val user = userDao.findUserByName(userName)
         return try {
-            val response = githubService.getUser(userName = userName)
-            if (response.isSuccessful) {
-                response.body()!!
+            if (user.hasDetailed == true) {
+                UserToDetailedUserMapper().map(user)
             } else {
-                Log.w(TAG, "${response.code()}: ${response.message()}")
-                null
+                val response = githubService.getUser(userName = userName)
+                if (response.isSuccessful) {
+                    val detailedUser = response.body()!!.apply {
+                        this.hasDetailed = true
+                    }
+                    userDao.update(detailedUser)
+                    detailedUser
+                } else {
+                    Log.w(TAG, "${response.code()}: ${response.message()}")
+                    null
+                }
             }
         } catch (ex: Exception) {
             Log.w(TAG, ex.message.orEmpty())
