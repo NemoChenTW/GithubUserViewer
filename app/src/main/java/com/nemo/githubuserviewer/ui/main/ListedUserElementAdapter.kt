@@ -40,11 +40,11 @@ class ListedUserElementAdapter(val itemClick: ItemClick<ListedUser>) : PagingDat
 
     companion object DiffCallback : DiffUtil.ItemCallback<ListedUser>() {
         override fun areItemsTheSame(oldItem: ListedUser, newItem: ListedUser): Boolean {
-            return oldItem === newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: ListedUser, newItem: ListedUser): Boolean {
-            return (oldItem.id == newItem.id)
+            return (oldItem.login == newItem.login && oldItem.avatar_url == newItem.avatar_url)
         }
 
     }

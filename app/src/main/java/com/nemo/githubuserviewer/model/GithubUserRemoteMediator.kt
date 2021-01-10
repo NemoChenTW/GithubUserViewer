@@ -5,7 +5,6 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.nemo.githubuserviewer.githubapi.GithubService
-import com.nemo.githubuserviewer.model.data.ListedUser
 import com.nemo.githubuserviewer.model.database.UserDao
 import com.nemo.githubuserviewer.model.database.entity.User
 
