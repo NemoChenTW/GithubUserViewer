@@ -30,7 +30,9 @@ class MainFragment : Fragment() {
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
     private val listedUserElementAdapter = ListedUserElementAdapter(object : ItemClick<ListedUser> {
         override fun onItemClicked(view: View, item: ListedUser) {
-            viewModel.userDetail(item.login)
+            if (viewModel.isProcessing.value != true) {
+                viewModel.userDetail(item.login)
+            }
         }
 
     })
