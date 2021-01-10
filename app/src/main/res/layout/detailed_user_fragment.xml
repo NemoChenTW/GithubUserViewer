@@ -45,6 +45,8 @@
             android:id="@+id/bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:singleLine="true"
             android:text="@{viewModel.detailedUser.bio}"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/guideline_horizon"
@@ -157,18 +159,18 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_baseline_favorite_24"
-            app:layout_constraintTop_toBottomOf="@id/guideline_bottom"
+            app:layout_constraintEnd_toEndOf="@id/icon_link"
             app:layout_constraintStart_toStartOf="@id/icon_link"
-            app:layout_constraintEnd_toEndOf="@id/icon_link"/>
+            app:layout_constraintTop_toBottomOf="@id/guideline_bottom" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/favorite_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="@{viewModel.detailedUser.isFavorite() == true}"
+            app:layout_constraintBottom_toBottomOf="@id/icon_favorite"
             app:layout_constraintStart_toStartOf="@id/text_link"
-            app:layout_constraintTop_toTopOf="@id/icon_favorite"
-            app:layout_constraintBottom_toBottomOf="@id/icon_favorite"/>
+            app:layout_constraintTop_toTopOf="@id/icon_favorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
