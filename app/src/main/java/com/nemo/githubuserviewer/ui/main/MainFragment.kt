@@ -75,7 +75,7 @@ class MainFragment : Fragment() {
 
         viewModel.detailedUser.observe(viewLifecycleOwner, Observer {
             it?.let {
-                showDetailedUser(DetailedUserFragment(it))
+                showDetailedUser(DetailedUserFragment(it, viewModel.userRepository))
             }
         })
     }

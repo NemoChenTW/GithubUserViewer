@@ -167,7 +167,8 @@
             android:id="@+id/favorite_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="@{viewModel.detailedUser.isFavorite() == true}"
+            android:checked="@={viewModel.isFavorite()}"
+            android:onClick="@{() -> viewModel.favoriteUser()}"
             app:layout_constraintBottom_toBottomOf="@id/icon_favorite"
             app:layout_constraintStart_toStartOf="@id/text_link"
             app:layout_constraintTop_toTopOf="@id/icon_favorite" />

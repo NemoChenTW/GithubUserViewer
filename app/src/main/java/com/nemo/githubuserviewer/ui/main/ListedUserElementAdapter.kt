@@ -45,7 +45,8 @@ class ListedUserElementAdapter(val itemClick: ItemClick<ListedUser>) : PagingDat
         }
 
         override fun areContentsTheSame(oldItem: ListedUser, newItem: ListedUser): Boolean {
-            return (oldItem.login == newItem.login && oldItem.avatar_url == newItem.avatar_url)
+            return (oldItem.login == newItem.login && oldItem.avatar_url == newItem.avatar_url
+                    && oldItem.isFavorite == newItem.isFavorite)
         }
 
     }

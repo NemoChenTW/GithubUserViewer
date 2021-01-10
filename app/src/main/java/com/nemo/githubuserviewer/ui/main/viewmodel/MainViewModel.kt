@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+class MainViewModel @Inject constructor(val userRepository: UserRepository) : ViewModel() {
 
     val usersList = userRepository.fetchUserList().cachedIn(viewModelScope).asLiveData()
     val detailedUser = MutableLiveData<DetailedUser?>()
