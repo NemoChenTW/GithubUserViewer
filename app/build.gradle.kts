@@ -30,6 +30,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
 
     buildFeatures {
@@ -53,6 +54,7 @@ dependencies {
     implementation(Dependencies.Google.material)
 
     implementation(Dependencies.AndroidX.Room.room)
+    implementation(Dependencies.AndroidX.Room.roomKtx)
     kapt(Dependencies.AndroidX.Room.Kapt.roomCompiler)
 
     implementation(Dependencies.Glide.glide)

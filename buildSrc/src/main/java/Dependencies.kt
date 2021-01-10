@@ -15,18 +15,17 @@ object Dependencies {
 
         object Room {
             const val room = "androidx.room:room-runtime:${Versions.room}"
+            const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
 
             object Kapt {
                 const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
             }
         }
 
-
         object Lifecycle {
             const val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
             const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
         }
-
     }
 
     object Dagger2 {

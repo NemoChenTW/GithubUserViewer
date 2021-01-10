@@ -1,5 +1,6 @@
 package com.nemo.githubuserviewer.model.database
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.nemo.githubuserviewer.model.data.DetailedUser
 import com.nemo.githubuserviewer.model.data.ListedUser
@@ -9,8 +10,11 @@ import com.nemo.githubuserviewer.model.database.entity.UserHasDetailed
 
 @Dao
 interface UserDao {
-    @Insert
-    fun insert(user: User)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(user: User)
+
+    @Insert(entity = User::class, onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(listedUsers: List<ListedUser>)
 
     @Update
     fun update(user: User)
@@ -29,6 +33,9 @@ interface UserDao {
 
     @Delete
     fun delete(user: User)
+
+    @Query("SELECT * FROM users")
+    fun queryAllData(): PagingSource<Int, User>
 
     @Query("SELECT * FROM users WHERE login = :name")
     fun findUserByName(name: String): User

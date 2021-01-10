@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nemo.githubuserviewer.R
 import com.nemo.githubuserviewer.databinding.MainFragmentBinding
 import com.nemo.githubuserviewer.di.GithubUserViewerComponentProvider
-import com.nemo.githubuserviewer.model.data.DetailedUser
 import com.nemo.githubuserviewer.model.data.ListedUser
 import com.nemo.githubuserviewer.ui.main.viewmodel.MainViewModel
 import javax.inject.Inject
@@ -61,7 +60,7 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.usersList.observe(viewLifecycleOwner, Observer {
-            listedUserElementAdapter.submitList(it)
+            listedUserElementAdapter.submitData(lifecycle, it)
         })
 
         viewModel.detailedUser.observe(viewLifecycleOwner, Observer {

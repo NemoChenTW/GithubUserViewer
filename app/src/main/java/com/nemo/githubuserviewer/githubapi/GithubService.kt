@@ -18,7 +18,7 @@ interface GithubService {
         @Header("accept") accept: String = ACCEPT_HEADER,
         @Query("since") since: Int? = null,
         @Query("per_page") perPage: Int? = null
-    ): Response<List<ListedUser>>
+    ): List<ListedUser>
 
     @GET("/users/{username}")
     suspend fun getUser(

@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nemo.githubuserviewer.databinding.ListedUserElementBinding
 import com.nemo.githubuserviewer.model.data.ListedUser
 
-class ListedUserElementAdapter(val itemClick: ItemClick<ListedUser>) : PagedListAdapter<ListedUser, RecyclerView.ViewHolder>(DiffCallback) {
+class ListedUserElementAdapter(val itemClick: ItemClick<ListedUser>) : PagingDataAdapter<ListedUser, RecyclerView.ViewHolder>(DiffCallback) {
 
     class ViewHolder(var binding: ListedUserElementBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListedUser, itemClick: ItemClick<ListedUser>) {
