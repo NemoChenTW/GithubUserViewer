@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.nemo.githubuserviewer.R
 import com.nemo.githubuserviewer.databinding.DetailedUserFragmentBinding
 import com.nemo.githubuserviewer.model.UserRepository
 import com.nemo.githubuserviewer.model.data.DetailedUser
@@ -33,18 +34,27 @@ class DetailedUserFragment(private val detailedUser: DetailedUser, private val u
         binding.lifecycleOwner = this
 
         viewModel.biFollowing.observe(viewLifecycleOwner, Observer {
-            var message = ""
             if (it.isEmpty()) {
-                message = "Sorry, you have no friends."
+                Toast.makeText(context, "Sorry, you have no friends.", Toast.LENGTH_SHORT).show()
             } else {
-                it.forEach { user ->
-                    message += "${user.login}, "
-                }
-                message = message.dropLast(2) + " are bidirectional followed."
+                showBidirectionalFollowers(BidirectionalFollowedFragment(it))
             }
 
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    private fun showBidirectionalFollowers(fragment: BidirectionalFollowedFragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                        android.R.anim.fade_in,
+                        android.R.anim.fade_out,
+                        android.R.anim.fade_in,
+                        android.R.anim.fade_out
+                )
+                .add(R.id.container, fragment)
+                .show(fragment)
+                .addToBackStack(BidirectionalFollowedFragment.TAG)
+                .commit()
     }
 
     companion object {
