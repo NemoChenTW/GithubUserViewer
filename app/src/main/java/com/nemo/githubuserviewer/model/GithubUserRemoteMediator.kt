@@ -20,7 +20,12 @@ class GithubUserRemoteMediator(
 
         try {
             val pageKey = when (loadType) {
-                LoadType.REFRESH -> null
+                LoadType.REFRESH -> {
+                    if (userDao.queryData(state.config.initialLoadSize).size == state.config.initialLoadSize) {
+                        return MediatorResult.Success(endOfPaginationReached = false)
+                    }
+                    null
+                }
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()

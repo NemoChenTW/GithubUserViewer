@@ -33,6 +33,9 @@ interface UserDao {
     @Query("SELECT * FROM users")
     fun queryAllData(): PagingSource<Int, User>
 
+    @Query("SELECT * FROM users LIMIT :size")
+    suspend fun queryData(size: Int): List<User>
+
     @Query("SELECT * FROM users WHERE login = :name")
     fun findUserByName(name: String): User
 }

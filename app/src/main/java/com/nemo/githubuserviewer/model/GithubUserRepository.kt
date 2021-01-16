@@ -112,7 +112,7 @@ class GithubUserRepository @Inject constructor(
         const val TAG = "GithubUserRepository"
 
         val pagingConfig = PagingConfig(
-            pageSize = 15,
+            pageSize = 10,
             prefetchDistance = 5,
             enablePlaceholders = false
         )
